@@ -1,16 +1,56 @@
-# React + Vite
+# 🖼️ ImageHub
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Studio Minimalist Image Management & Discovery Platform**
 
-Currently, two official plugins are available:
+ImageHub is a premium web application designed for creators to manage visual assets. Built with a "Studio" aesthetic, it combines a high-contrast minimalist interface with powerful cloud storage and personalized content discovery.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## 📸 Preview
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
-## Expanding the ESLint configuration
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## ✨ Core Features
+
+* **Asset Management:** Create your own library by uploading images directly to the cloud.
+* **Public Exploration:** Integrated with the **Picsum API** to provide random inspiration for guest users.
+* **Smart Feed:** Personalized recommendations based on user-selected categories and interests.
+* **Responsive Engine:** Fully adaptive layout—from mobile drawers to 4-column desktop masonry grids.
+* **Secure Auth:** Firebase-powered authentication and real-time database integration.
+
+---
+
+## 🛠️ Technology Stack
+
+| Layer | Technology |
+| :--- | :--- |
+| **Framework** | React.js (v17) |
+| **Styling** | Tailwind CSS |
+| **Database** | Firebase Firestore |
+| **Authentication** | Firebase Auth |
+| **Storage** | Cloudinary API |
+| **Navigation** | React Router DOM |
+
+---
+
+## 🚀 Installation & Setup
+
+### 1. Clone the repository
+```bash
+git clone [https://github.com/your-username/imagehub.git](https://github.com/your-username/imagehub.git)
+cd imagehub
+### 2.Install dependencies
+Bash
+npm install
+
+###3. Environment Configuration
+Create a .env file in the root directory and add your keys:
+
+
+Code snippet
+VITE_CLOUDINARY_CLOUD_NAME=your_cloud_name
+VITE_CLOUDINARY_UPLOAD_PRESET=your_unsigned_preset
+
+4. Run Development Server
+Bash
+npm run dev

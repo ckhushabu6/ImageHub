@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useAuth } from "./context/AuthContext.jsx";
-
+import ProfileSettings from "./pages/ProfileSettings";
 import Home from "./pages/Home.jsx";
 import Login from "./pages/Login.jsx";
 import Dashboard from "./pages/Dashboard.jsx";
@@ -42,6 +42,7 @@ function App() {
           path="/recommendations"
           element={currentUser ? <Recommendations /> : <Navigate to="/" />}
         />
+        <Route path="/profile" element={<ProfileSettings />} />
 
         {/* Catch-all */}
         <Route path="*" element={<Navigate to="/" />} />
