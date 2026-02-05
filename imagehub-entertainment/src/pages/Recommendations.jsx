@@ -20,9 +20,6 @@ const Recommendations = () => {
         const user = auth.currentUser;
         if (!user) return;
 
-        /* =========================
-           1️⃣ Fetch user interests
-        ========================== */
         const userRef = doc(db, "users", user.uid);
         const userSnap = await getDoc(userRef);
 
@@ -39,14 +36,10 @@ const Recommendations = () => {
           return;
         }
 
-        /* =========================
-           2️⃣ Query public images
-           matching interests
-        ========================== */
         const imagesQuery = query(
           collection(db, "images"),
           where("isPublic", "==", true),
-          where("category", "in", userInterests.slice(0, 10)) // Firestore limit
+          where("category", "in", userInterests.slice(0, 10))
         );
 
         const querySnapshot = await getDocs(imagesQuery);
@@ -67,37 +60,76 @@ const Recommendations = () => {
   }, []);
 
   if (loading) {
-    return <p style={styles.loading}>Loading recommendations...</p>;
+    return (
+      <div className="p-8 max-w-7xl mx-auto">
+        <div className="h-8 w-48 bg-slate-200 animate-pulse rounded-lg mb-8 mx-auto md:mx-0"></div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          {[1, 2, 3, 4].map((n) => (
+            <div key={n} className="bg-white rounded-3xl border border-slate-100 overflow-hidden shadow-sm">
+              <div className="h-48 bg-slate-200 animate-pulse w-full"></div>
+              <div className="p-4 space-y-3">
+                <div className="h-4 bg-slate-200 animate-pulse w-3/4 rounded"></div>
+                <div className="h-3 bg-slate-200 animate-pulse w-1/2 rounded"></div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
   }
 
   return (
-    <div style={styles.container}>
-      <h2 style={styles.heading}>Recommended For You</h2>
+    <div className="p-8 max-w-7xl mx-auto min-h-screen">
+      <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+        <div className="text-center md:text-left">
+          <h2 className="text-3xl font-black text-slate-800 tracking-tight">Recommended For You</h2>
+          <p className="text-slate-500 mt-1 italic text-sm">Matches your interests: {interests.join(", ")}</p>
+        </div>
+        <div className="h-1 flex-1 bg-slate-100 mx-8 mb-4 hidden lg:block rounded-full"></div>
+      </div>
 
       {images.length === 0 ? (
-        <div style={styles.noResult}>
-          <p>No matching images found 😔</p>
-          <p>Try exploring popular categories:</p>
-          <div style={styles.tags}>
+        <div className="text-center py-20 bg-white rounded-[3rem] border-2 border-dashed border-slate-200 shadow-sm">
+          <div className="text-5xl mb-4">😔</div>
+          <h3 className="text-xl font-bold text-slate-700">No matching images found</h3>
+          <p className="text-slate-500 mb-8 px-4 text-sm">Try adding more interests or explore these:</p>
+          
+          <div className="flex flex-wrap justify-center gap-3 px-4">
             {["Nature", "Tech", "Art", "Travel", "People"].map((cat) => (
-              <span key={cat} style={styles.tag}>
+              <span 
+                key={cat} 
+                className="px-6 py-2 rounded-full bg-indigo-50 text-indigo-600 font-bold text-xs shadow-sm border border-indigo-100"
+              >
                 {cat}
               </span>
             ))}
           </div>
         </div>
       ) : (
-        <div style={styles.grid}>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
           {images.map((img) => (
-            <div key={img.id} style={styles.card}>
-              <img
-                src={img.imageUrl}
-                alt={img.title}
-                style={styles.image}
-              />
-              <div style={styles.cardInfo}>
-                <h4>{img.title}</h4>
-                <p style={styles.category}>{img.category}</p>
+            <div 
+              key={img.id} 
+              className="group bg-white rounded-[2rem] overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 border border-slate-100"
+            >
+              <div className="relative h-60 overflow-hidden">
+                <img
+                  src={img.imageUrl}
+                  alt={img.title}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+                {/* Category Tag Overlay */}
+                <div className="absolute top-4 left-4">
+                  <span className="px-3 py-1 bg-black/50 backdrop-blur-md text-[9px] font-black uppercase tracking-widest text-white rounded-lg border border-white/20">
+                    {img.category}
+                  </span>
+                </div>
+              </div>
+              
+              <div className="p-5">
+                <h4 className="font-bold text-slate-800 text-base truncate">
+                  {img.title || "Untitled Artwork"}
+                </h4>
               </div>
             </div>
           ))}
@@ -108,61 +140,3 @@ const Recommendations = () => {
 };
 
 export default Recommendations;
-
-/* =========================
-   Styles (Responsive Grid)
-========================= */
-const styles = {
-  container: {
-    padding: "30px",
-  },
-  heading: {
-    marginBottom: "20px",
-    textAlign: "center",
-  },
-  loading: {
-    textAlign: "center",
-    marginTop: "50px",
-  },
-  grid: {
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))",
-    gap: "20px",
-  },
-  card: {
-    borderRadius: "12px",
-    overflow: "hidden",
-    boxShadow: "0 10px 20px rgba(0,0,0,0.1)",
-    background: "#fff",
-  },
-  image: {
-    width: "100%",
-    height: "180px",
-    objectFit: "cover",
-  },
-  cardInfo: {
-    padding: "10px",
-  },
-  category: {
-    fontSize: "12px",
-    color: "#6b7280",
-  },
-  noResult: {
-    textAlign: "center",
-    marginTop: "40px",
-  },
-  tags: {
-    display: "flex",
-    justifyContent: "center",
-    gap: "10px",
-    marginTop: "10px",
-    flexWrap: "wrap",
-  },
-  tag: {
-    padding: "6px 12px",
-    borderRadius: "20px",
-    background: "#eef2ff",
-    color: "#4f46e5",
-    fontSize: "13px",
-  },
-};
