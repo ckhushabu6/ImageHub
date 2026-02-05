@@ -54,8 +54,8 @@ const Login = () => {
             <label className="block text-sm font-semibold text-slate-700 mb-1.5 ml-1">Email Address</label>
             <input
               type="email"
-              placeholder="name@company.com"
-              className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 outline-none transition-all"
+              placeholder="name@gmail.com"
+              className="w-full px-4 py-3 rounded-xl border  text-slate-700 border-slate-200 focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 outline-none transition-all"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
@@ -68,7 +68,7 @@ const Login = () => {
             <input
               type="password"
               placeholder="••••••••"
-              className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 outline-none transition-all"
+              className="w-full px-4 py-3 rounded-xl border  text-slate-700 border-slate-200 focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 outline-none transition-all"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required

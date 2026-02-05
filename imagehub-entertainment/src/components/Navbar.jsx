@@ -1,12 +1,12 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
-import { ThemeContext } from "../context/ThemeContext";
+
 import { useAuth } from "../context/AuthContext";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../firebase/firebaseConfig";
 
 const Navbar = () => {
-  const { dark, setDark } = useContext(ThemeContext);
+ 
   const { currentUser, logout } = useAuth();
   const [photoURL, setPhotoURL] = useState("");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -63,16 +63,7 @@ const Navbar = () => {
               <div className="w-[1px] h-6 bg-slate-200 dark:bg-white/10 mx-2" />
 
               {/* Theme Toggle (Desktop) */}
-              <button 
-                onClick={() => setDark(!dark)} 
-                className="p-2 rounded-xl bg-slate-100 dark:bg-white/5 text-slate-600 dark:text-slate-300 hover:bg-indigo-50 dark:hover:bg-indigo-500/10 transition-colors"
-              >
-                {dark ? (
-                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5"><path strokeLinecap="round" strokeLinejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M3 12h2.25m.386-6.364l1.591-1.591M12 7.5a4.5 4.5 0 110 9 4.5 4.5 0 010-9z" /></svg>
-                ) : (
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5"><path strokeLinecap="round" strokeLinejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" /></svg>
-                )}
-              </button>
+             
 
               {/* Sign Out (Desktop) */}
               <button 
@@ -85,7 +76,7 @@ const Navbar = () => {
 
             {/* Profile Avatar (Visible on all screens) */}
             <button 
-              onClick={() => { navigate("/profile"); setIsMenuOpen(false); }}
+              onClick={() => { navigate("/profile?from=nav"); setIsMenuOpen(false); }}
               className="w-9 h-9 md:w-11 md:h-11 rounded-full p-0.5 border-2 border-transparent hover:border-indigo-500 transition-all shrink-0"
             >
               <div className="w-full h-full rounded-full overflow-hidden bg-slate-200 dark:bg-slate-800">
@@ -162,17 +153,7 @@ const Navbar = () => {
               <div className="h-[1px] bg-slate-100 dark:bg-white/5 my-2 mx-2" />
 
               {/* Theme Mode Toggle Row */}
-              {/* <button 
-                onClick={() => { setDark(!dark); setIsMenuOpen(false); }}
-                className="flex items-center justify-between p-4 rounded-xl hover:bg-indigo-50 dark:hover:bg-indigo-500/10 text-sm font-bold text-slate-700 dark:text-slate-200 uppercase tracking-widest transition-all"
-              >
-                <div className="flex items-center gap-3">
-                  <span className="text-lg">{dark ? "☀️" : "🌙"}</span>
-                  <span>{dark ? "Light Mode" : "Dark Mode"}</span>
-                </div>
-                <div className="px-2 py-1 bg-slate-100 dark:bg-slate-800 rounded-md text-[10px] opacity-60 uppercase">Switch</div>
-              </button> */}
-
+             
               {/* Sign Out Row */}
               <button 
                 onClick={async () => { await logout(); navigate("/login"); setIsMenuOpen(false); }}

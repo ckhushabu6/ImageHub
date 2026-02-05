@@ -67,7 +67,18 @@ const Upload = () => {
 
   return (
     <div className="min-h-[calc(100vh-80px)] flex items-center justify-center px-4 bg-slate-50">
-      <div className="w-full max-w-[450px] bg-white rounded-[2.5rem] shadow-2xl border border-slate-200 overflow-hidden">
+      <div className="w-full max-w-[450px] bg-white rounded-[2.5rem] shadow-2xl border border-slate-200 overflow-hidden relative">
+        
+        {/* --- CLOSE BUTTON (X) --- */}
+        <button 
+          onClick={() => navigate("/dashboard")}
+          className="absolute top-5 right-5 p-2 rounded-full bg-slate-50 text-slate-400 hover:bg-rose-50 hover:text-rose-500 transition-all z-10 border border-slate-100 shadow-sm group"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-5 h-5 group-active:scale-90 transition-transform">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+
         {/* Header Color Strip */}
         <div className="h-2 bg-indigo-600 w-full"></div>
         
@@ -96,7 +107,7 @@ const Upload = () => {
               <input
                 type="text"
                 placeholder="e.g. Modern Architecture"
-                className="w-full px-5 py-4 rounded-2xl bg-slate-50 border border-slate-200 focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 outline-none transition-all"
+                className="w-full  text-slate-700 px-5 py-4 rounded-2xl bg-slate-50 border border-slate-200 focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 outline-none transition-all"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
                 required
