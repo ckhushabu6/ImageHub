@@ -63,7 +63,7 @@ const Navbar = () => {
               <div className="w-[1px] h-6 bg-slate-200 dark:bg-white/10 mx-2" />
 
               {/* Theme Toggle (Desktop) */}
-              {/* <button 
+              <button 
                 onClick={() => setDark(!dark)} 
                 className="p-2 rounded-xl bg-slate-100 dark:bg-white/5 text-slate-600 dark:text-slate-300 hover:bg-indigo-50 dark:hover:bg-indigo-500/10 transition-colors"
               >
@@ -72,7 +72,7 @@ const Navbar = () => {
                 ) : (
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5"><path strokeLinecap="round" strokeLinejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" /></svg>
                 )}
-              </button> */}
+              </button>
 
               {/* Sign Out (Desktop) */}
               <button 
@@ -120,6 +120,19 @@ const Navbar = () => {
           <div className="md:hidden fixed top-[72px] right-4 left-4 p-3 rounded-2xl bg-white/95 dark:bg-slate-900/95 shadow-2xl border border-slate-200/50 dark:border-white/10 backdrop-blur-xl animate-in fade-in zoom-in duration-200 origin-top-right">
             <div className="flex flex-col gap-1">
               
+              {/* Upload New Row (Added for Mobile Users) */}
+              <Link 
+                to="/upload" 
+                onClick={() => setIsMenuOpen(false)}
+                className="flex items-center justify-between p-4 rounded-xl bg-indigo-600 text-white text-sm font-bold uppercase tracking-widest shadow-lg shadow-indigo-200 dark:shadow-none mb-2"
+              >
+                <div className="flex items-center gap-3">
+                  <span className="text-lg">📤</span>
+                  <span>Upload New</span>
+                </div>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-4 h-4"><path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" /></svg>
+              </Link>
+
               {/* Library Row */}
               <Link 
                 to="/dashboard" 
@@ -157,7 +170,7 @@ const Navbar = () => {
                   <span className="text-lg">{dark ? "☀️" : "🌙"}</span>
                   <span>{dark ? "Light Mode" : "Dark Mode"}</span>
                 </div>
-                <div className="px-2 py-1 bg-slate-100 dark:bg-slate-800 rounded-md text-[10px] opacity-60">SWITCH</div>
+                <div className="px-2 py-1 bg-slate-100 dark:bg-slate-800 rounded-md text-[10px] opacity-60 uppercase">Switch</div>
               </button> */}
 
               {/* Sign Out Row */}

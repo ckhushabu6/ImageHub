@@ -1,21 +1,26 @@
 // src/firebase/firebaseConfig.js
-
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
+import { initializeFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBXLitwMW9cin5-vwyuJvaZb3Ss71WF5M0",
-  authDomain: "imagehub-entertainment.firebaseapp.com",
-  projectId: "imagehub-entertainment",
-  storageBucket: "imagehub-entertainment.appspot.com", // ✅ FIXED
-  messagingSenderId: "781339501485",
-  appId: "1:781339501485:web:a9ee64ee7e797768187724", // ✅ ImageHub appId
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
 };
 
 const app = initializeApp(firebaseConfig);
 
+export const db = initializeFirestore(app, {
+  experimentalForceLongPolling: true, 
+  useFetchStreams: false,
+});
+
 export const auth = getAuth(app);
-export const db = getFirestore(app);
+// export const db = getFirestore(app);
 
 export default app;
